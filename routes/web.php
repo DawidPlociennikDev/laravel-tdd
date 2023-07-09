@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Movie;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +15,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $movies = Movie::all();
+    return view('welcome', compact('movies'));
 });
+
+Route::post('movies/{id}', [MovieController::class, 'update'])->name('movie.update');
